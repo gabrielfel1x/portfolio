@@ -5,6 +5,7 @@ import imart from './utils/imart.png';
 import realtime from './utils/realtime.png';
 import auth from './utils/auth.png';
 import recipes from './utils/recipes.png';
+import concord from './utils/concord.png';
 
 function App() {
   const name = "Gabriel Felix";
@@ -48,6 +49,13 @@ function App() {
   ];
 
   const projects = [
+    {
+      title: "Concord - Sistema de Chat",
+      description: "Sistema Web de chat baseado no Disord.",
+      link: "https://www.linkedin.com/posts/gabrielfel1x_concord-sistema-web-de-chat-inspirado-no-activity-7322590425398030336-oQzo?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD_vjZkBeYjKjlouVzeq0JXBHoyOjNmn2gc",
+      image: concord,
+      tags: ["React", "TanStack Query", "TypeScript", "Ruby on Rails"]
+    },
     {
       title: "iMart - Market System",
       description: "Sistema Web e Mobile para gestão moderna e integrada de supermercados.",
@@ -98,7 +106,7 @@ function App() {
   ];  
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#000] via-[#00111f] to-[#000] text-white">
+    <div className="min-h-screen bg-white text-gray-900">
       <motion.header 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -106,14 +114,14 @@ function App() {
       >
         <nav className="flex justify-between items-center mb-16">
           <motion.div 
-            whileHover={{ scale: 1.1 }}
-            className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00FFFF] to-[#00BFFF]"
+            whileHover={{ scale: 1.05 }}
+            className="text-2xl font-bold text-gray-800"
           >
             Portfolio
           </motion.div>
           <div className="flex gap-6">
-            <a href="https://www.github.com/gabrielfel1x" className="hover:text-[#00FFFF] transition-colors"><Github /></a>
-            <a href="https://www.linkedin.com/in/gabrielfel1x" className="hover:text-[#00FFFF] transition-colors"><Linkedin /></a>
+            <a href="https://www.github.com/gabrielfel1x" className="hover:text-gray-600 transition-colors"><Github /></a>
+            <a href="https://www.linkedin.com/in/gabrielfel1x" className="hover:text-gray-600 transition-colors"><Linkedin /></a>
           </div>
         </nav>
 
@@ -124,30 +132,30 @@ function App() {
           className="max-w-4xl mx-auto text-center"
         >
           <motion.h1 
-            className="text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#00FFFF] to-[#00BFFF]"
+            className="text-6xl font-bold mb-6 text-gray-900"
           >
             {displayText}
-            <span className="border-r-2 border-[#00FFFF] ml-1 animate-pulse"></span>
+            <span className="border-r-2 border-gray-900 ml-1 animate-pulse"></span>
           </motion.h1>
-          <h2 className="text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#00FFFF] to-[#00BFFF]">
+          <h2 className="text-4xl font-bold mb-6 text-gray-700">
             Front-End Developer
           </h2>
-          <p className="text-xl text-gray-300 mb-8">
+          <p className="text-xl text-gray-600 mb-8">
             Sou um desenvolvedor dedicado e estou sempre buscando oportunidades para me aprimorar.
           </p>
           <div className="flex justify-center gap-4">
             <motion.p 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex flex-row gap-8 px-8 py-3 border-2 border-none rounded-full font-semibold transition-colors"
-            ><Mail />
+              className="flex flex-row gap-8 px-8 py-3 border-2 border-gray-200 rounded-full font-semibold transition-colors hover:bg-gray-100"
+            ><Mail className="text-gray-600" />
               gabrielfelxx@gmail.com
             </motion.p>
           </div>
         </motion.div>
       </motion.header>
 
-      <div className="py-20 bg-[#00111f]/50 overflow-hidden">
+      <div className="py-12 bg-gray-50 overflow-hidden">
         <motion.div 
           animate={{
             x: [0, -1920],
@@ -165,7 +173,7 @@ function App() {
           {technologies.map((tech, index) => (
             <div
               key={index}
-              className="mx-8 text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00FFFF] to-[#00BFFF]"
+              className="mx-8 text-2xl font-bold text-gray-400"
             >
               {tech}
             </div>
@@ -182,28 +190,28 @@ function App() {
             className="grid grid-cols-1 md:grid-cols-4 gap-8"
           >
             {[
-              { icon: <Code size={32} />, title: "Desenvolvimento Front-End", desc: "React, Vue, TypeScript" },
-              { icon: <Layout size={32} />, title: "Design Responsivo", desc: "Mobile-First, Adaptive UI" },
-              { icon: <Palette size={32} />, title: "Desenvolvimento de UI", desc: "Tailwind CSS, SCSS" },
-              { icon: <Smartphone size={32} />, title: "Desenvolvimento Mobile", desc: "React Native" }
+              { icon: <Code size={32} className="text-gray-700" />, title: "Desenvolvimento Front-End", desc: "React, Vue, TypeScript" },
+              { icon: <Layout size={32} className="text-gray-700" />, title: "Design Responsivo", desc: "Mobile-First, Adaptive UI" },
+              { icon: <Palette size={32} className="text-gray-700" />, title: "Desenvolvimento de UI", desc: "Tailwind CSS, SCSS" },
+              { icon: <Smartphone size={32} className="text-gray-700" />, title: "Desenvolvimento Mobile", desc: "React Native" }
             ].map((skill, index) => (
               <motion.div
                 key={index}
-                whileHover={{ scale: 1.05 }}
-                className="p-6 rounded-xl bg-gradient-to-br from-[#00111f] to-transparent border border-[#00FFFF]/30"
+                whileHover={{ scale: 1.03 }}
+                className="p-6 rounded-xl bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow"
               >
-                <div className="text-[#00FFFF] mb-4">{skill.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{skill.title}</h3>
-                <p className="text-gray-400">{skill.desc}</p>
+                <div className="text-gray-700 mb-4">{skill.icon}</div>
+                <h3 className="text-xl font-semibold mb-2 text-gray-800">{skill.title}</h3>
+                <p className="text-gray-600">{skill.desc}</p>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      <section className="py-20 bg-[#000f1a]">
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16">Projetos em destaque</h2>
+          <h2 className="text-4xl font-bold text-center mb-16 text-gray-800">Projetos em destaque</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {projects.map((project, index) => (
               <motion.div
@@ -212,7 +220,7 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
-                className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-[#00111f] to-transparent border border-[#00FFFF]/30"
+                className="group relative overflow-hidden rounded-xl bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow"
               >
                 <img 
                   src={project.image} 
@@ -220,13 +228,13 @@ function App() {
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                  <p className="text-gray-400 mb-4">{project.description}</p>
+                  <h3 className="text-xl font-semibold mb-2 text-gray-800">{project.title}</h3>
+                  <p className="text-gray-600 mb-4">{project.description}</p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.map((tag, tagIndex) => (
                       <span 
                         key={tagIndex}
-                        className="px-3 py-1 text-sm bg-[#00FFFF]/10 rounded-full border border-[#00FFFF]/30"
+                        className={`px-3 py-1 text-sm bg-gray-100 rounded-full border border-gray-200 ${tag === "Ruby on Rails" ? 'opacity-40' : '' }`}
                       >
                         {tag}
                       </span>
@@ -235,7 +243,7 @@ function App() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="flex items-center gap-2 text-[#00FFFF] hover:text-[#00BFFF]"
+                    className="flex items-center gap-2 text-gray-700 hover:text-gray-900"
                     onClick={() => window.open(project.link, '_blank')}
                   >
                     Demonstração <ExternalLink size={16} />
@@ -249,7 +257,7 @@ function App() {
 
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16">Experiências</h2>
+          <h2 className="text-4xl font-bold text-center mb-16 text-gray-800">Experiências</h2>
           <div className="max-w-4xl mx-auto space-y-8">
             {experiences.map((exp, index) => (
               <motion.div
@@ -258,42 +266,42 @@ function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
-                className="p-6 rounded-xl bg-gradient-to-br from-[#00111f] to-transparent border border-[#00FFFF]/30"
+                className="p-6 rounded-xl bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow"
               >
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-xl font-semibold text-[#00FFFF]">{exp.position}</h3>
-                    <p className="text-lg text-gray-300">{exp.company}</p>
+                    <h3 className="text-xl font-semibold text-gray-800">{exp.position}</h3>
+                    <p className="text-lg text-gray-700">{exp.company}</p>
                     {/* Lista de tecnologias */}
                     <div className="flex flex-wrap gap-2 mt-2">
                       {exp.technologies.map((tech, techIndex) => (
                         <span
                           key={techIndex}
-                          className="px-3 py-1 text-sm bg-[#00FFFF]/10 rounded-full border border-[#00FFFF]/30"
+                          className="px-3 py-1 text-sm bg-gray-100 rounded-full border border-gray-200"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
                   </div>
-                  <span className="text-gray-400">{exp.period}</span>
+                  <span className="text-gray-500">{exp.period}</span>
                 </div>
-                <p className="text-gray-300">{exp.description}</p>
+                <p className="text-gray-600">{exp.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-20">
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold mb-8">Vamos trabalhar juntos</h2>
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold mb-8 text-gray-800">Vamos trabalhar juntos</h2>
+            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
               Procurando um desenvolvedor front-end para dar vida à sua visão? Vamos criar algo incrível juntos.
             </p>
 
@@ -302,7 +310,7 @@ function App() {
                 href="mailto:gabrielfelxx@gmail.com"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-2 px-6 py-3 border-2 border-[#00FFFF] rounded-lg text-[#00FFFF] hover:bg-[#00FFFF]/10 transition-colors"
+                className="flex items-center gap-2 px-6 py-3 border-2 border-gray-800 rounded-lg text-gray-800 hover:bg-gray-100 transition-colors"
               >
                 <Mail size={20} />
                 gabrielfelxx@gmail.com
@@ -314,7 +322,7 @@ function App() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-2 px-6 py-3 border-2 border-[#00FFFF] rounded-lg text-[#00FFFF] hover:bg-[#00FFFF]/10 transition-colors"
+                className="flex items-center gap-2 px-6 py-3 border-2 border-gray-800 rounded-lg text-gray-800 hover:bg-gray-100 transition-colors"
               >
                 <Linkedin size={20} />
                 LinkedIn
@@ -326,7 +334,7 @@ function App() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-2 px-6 py-3 border-2 border-[#00FFFF] rounded-lg text-[#00FFFF] hover:bg-[#00FFFF]/10 transition-colors"
+                className="flex items-center gap-2 px-6 py-3 border-2 border-gray-800 rounded-lg text-gray-800 hover:bg-gray-100 transition-colors"
               >
                 <Github size={20} />
                 GitHub
