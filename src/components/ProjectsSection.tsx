@@ -115,11 +115,6 @@ const ProjectsSection = () => {
     }  
   ];
 
-  const openProject = (project: Project) => {
-    document.body.style.overflow = 'hidden';
-    setSelectedProject(project);
-  };
-
   const closeProject = () => {
     document.body.style.overflow = 'auto';
     setSelectedProject(null);
@@ -149,7 +144,7 @@ const ProjectsSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -158,7 +153,7 @@ const ProjectsSection = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="group bg-white dark:bg-gray-900 rounded-xl shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300"
             >
-              <div className="relative overflow-hidden h-48">
+              <div className="relative overflow-hidden h-40 sm:h-48">
                 <img 
                   src={project.image} 
                   alt={project.title} 
@@ -181,29 +176,20 @@ const ProjectsSection = () => {
                 </div>
               </div>
 
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{project.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">{project.description}</p>
+                <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base mb-4">{project.description}</p>
                 
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tags.map((tag, tagIndex) => (
-                    <span 
-                      key={tagIndex}
-                      className={`px-3 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-800 rounded-full ${
-                        tag === "Ruby on Rails" ? 'text-gray-500 dark:text-gray-500' : 'text-gray-700 dark:text-gray-300'
-                      }`}
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tech, i) => (
+                    <span
+                      key={i}
+                      className="px-2 py-1 text-xs sm:text-sm bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full"
                     >
-                      {tag}
+                      {tech}
                     </span>
                   ))}
                 </div>
-                
-                <button
-                  onClick={() => openProject(project)}
-                  className="w-full py-2 mt-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors font-medium"
-                >
-                  Ver detalhes
-                </button>
               </div>
             </motion.div>
           ))}

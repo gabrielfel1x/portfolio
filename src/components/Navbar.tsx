@@ -1,40 +1,46 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Github, Linkedin, Moon, Sun } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Github, Linkedin, Moon, Sun, Menu, X } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const [activeSection, setActiveSection] = useState('home');
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setScrolled(scrollPosition > 50);
-
-      const sections = ['home', 'about', 'skills', 'experience', 'projects', 'contact'];
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i]);
-        if (section && scrollPosition >= section.offsetTop - 200) {
-          setActiveSection(sections[i]);
-          break;
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { id: 'home', label: 'Home' },
+    { id: 'home', label: 'Início' },
     { id: 'about', label: 'Sobre' },
     { id: 'skills', label: 'Habilidades' },
     { id: 'experience', label: 'Experiência' },
     { id: 'projects', label: 'Projetos' },
     { id: 'contact', label: 'Contato' }
   ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 50;
+      setScrolled(isScrolled);
+
+      const sections = navItems.map(item => item.id);
+      const currentSection = sections.find(section => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= 100 && rect.bottom >= 100;
+        }
+        return false;
+      });
+
+      if (currentSection) {
+        setActiveSection(currentSection);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  });
 
   return (
     <motion.header
@@ -56,6 +62,7 @@ const Navbar = () => {
             GF
           </motion.div>
 
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             {navItems.map(item => (
               <a
@@ -79,6 +86,15 @@ const Navbar = () => {
               </a>
             ))}
           </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
 
           <div className="flex items-center space-x-4">
             <button 
@@ -112,6 +128,35 @@ const Navbar = () => {
             </div>
           </div>
         </div>
+
+        {/* Mobile Navigation */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.nav
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden overflow-hidden"
+            >
+              <div className="py-4 space-y-4">
+                {navItems.map(item => (
+                  <a
+                    key={item.id}
+                    href={`#${item.id}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`block text-base font-medium transition-colors hover:text-gray-600 dark:hover:text-gray-300
+                      ${activeSection === item.id 
+                        ? 'text-black dark:text-white' 
+                        : 'text-gray-500 dark:text-gray-400'}`}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+            </motion.nav>
+          )}
+        </AnimatePresence>
       </div>
     </motion.header>
   );

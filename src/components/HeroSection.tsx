@@ -55,7 +55,7 @@ const HeroSection = () => {
   }, [displayText, isDeleting, loopNum, typingSpeed, name]);
 
   return (
-    <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden dark:bg-gray-900">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden dark:bg-gray-900 pt-20 md:pt-36">
       <ParticleBackground visible={showParticles} />
       
       <div className="container mx-auto px-4 z-10">
@@ -68,7 +68,7 @@ const HeroSection = () => {
               className="flex-1 text-left"
             >
               <motion.h1 
-                className="text-6xl md:text-7xl font-bold mb-6 text-gray-900 dark:text-white relative"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 text-gray-900 dark:text-white relative"
               >
                 {displayText}
                 <span className="border-r-2 border-gray-900 dark:border-white ml-1 animate-pulse"></span>
@@ -78,7 +78,7 @@ const HeroSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-3xl md:text-4xl font-bold mb-6 text-gray-700 dark:text-gray-300"
+                className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6 text-gray-700 dark:text-gray-300"
               >
                 Software Developer
               </motion.h2>
@@ -87,7 +87,7 @@ const HeroSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
-                className="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl"
+                className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-6 md:mb-8 max-w-2xl"
               >
                 Focado em entregar valor e impulsionar o crescimento contínuo. Sempre em busca de novos desafios.
               </motion.p>
@@ -121,7 +121,7 @@ const HeroSection = () => {
 
             <motion.div 
               style={{ y, opacity } as never}
-              className="relative w-64 h-64 md:w-80 md:h-80 flex-shrink-0"
+              className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-80 lg:h-80 flex-shrink-0"
             >
               <img
                 src={me}

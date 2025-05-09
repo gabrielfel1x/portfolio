@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import SkillsBackground from './SkillsBackground';
+import { Icon } from '@iconify/react';
 
 type Skill = {
   name: string;
-  level: number;
+  icon: string;
   category: 'frontend' | 'backend' | 'tools';
   color: string;
 };
@@ -18,22 +18,22 @@ const SkillsSection = () => {
   });
 
   const skills: Skill[] = [
-    { name: 'React', level: 90, category: 'frontend', color: '#61DAFB' },
-    { name: 'Vue.js', level: 95, category: 'frontend', color: '#42b883' },
-    { name: 'TypeScript', level: 85, category: 'frontend', color: '#3178C6' },
-    { name: 'JavaScript', level: 92, category: 'frontend', color: '#F7DF1E' },
-    { name: 'Next.js', level: 80, category: 'frontend', color: '#000000' },
-    { name: 'Tailwind CSS', level: 88, category: 'frontend', color: '#38B2AC' },
-    { name: 'SCSS', level: 85, category: 'frontend', color: '#CC6699' },
-    { name: 'React Native', level: 75, category: 'frontend', color: '#61DAFB' },
-    { name: 'Python', level: 70, category: 'backend', color: '#3776AB' },
-    { name: 'Node.js', level: 50, category: 'backend', color: '#339933' },
-    { name: 'Flask', level: 65, category: 'backend', color: '#000000' },
-    { name: 'Django', level: 60, category: 'backend', color: '#092E20' },
-    { name: 'Firebase', level: 75, category: 'backend', color: '#FFCA28' },
-    { name: 'Git', level: 85, category: 'tools', color: '#F05032' },
-    { name: 'Figma', level: 80, category: 'tools', color: '#F24E1E' },
-    { name: 'TanStack Query', level: 80, category: 'frontend', color: '#FF4500' },
+    { name: 'React', icon: 'logos:react', category: 'frontend', color: '#61DAFB' },
+    { name: 'Vue.js', icon: 'logos:vue', category: 'frontend', color: '#42b883' },
+    { name: 'TypeScript', icon: 'logos:typescript-icon', category: 'frontend', color: '#3178C6' },
+    { name: 'JavaScript', icon: 'logos:javascript', category: 'frontend', color: '#F7DF1E' },
+    { name: 'Next.js', icon: 'logos:nextjs-icon', category: 'frontend', color: '#000000' },
+    { name: 'Tailwind CSS', icon: 'logos:tailwindcss-icon', category: 'frontend', color: '#38B2AC' },
+    { name: 'SCSS', icon: 'logos:sass', category: 'frontend', color: '#CC6699' },
+    { name: 'React Native', icon: 'logos:react', category: 'frontend', color: '#61DAFB' },
+    { name: 'Python', icon: 'logos:python', category: 'backend', color: '#3776AB' },
+    { name: 'Node.js', icon: 'logos:nodejs-icon', category: 'backend', color: '#339933' },
+    { name: 'Flask', icon: 'logos:flask', category: 'backend', color: '#000000' },
+    { name: 'Django', icon: 'logos:django-icon', category: 'backend', color: '#092E20' },
+    { name: 'Firebase', icon: 'logos:firebase', category: 'backend', color: '#FFCA28' },
+    { name: 'Git', icon: 'logos:git-icon', category: 'tools', color: '#F05032' },
+    { name: 'Figma', icon: 'logos:figma', category: 'tools', color: '#F24E1E' },
+    { name: 'VS Code', icon: 'logos:visual-studio-code', category: 'tools', color: '#007ACC' },
   ];
 
   const filteredSkills = activeCategory === 'all' 
@@ -50,15 +50,9 @@ const SkillsSection = () => {
     }
   };
 
-  const item = {
-    hidden: { opacity: 0, x: -20 },
-    show: { opacity: 1, x: 0 }
-  };
-
   return (
-    <section id="skills" className="py-20 bg-gray-50 dark:bg-gray-800 relative">
-      <SkillsBackground />
-      <div className="container mx-auto px-4 relative z-10">
+    <section id="skills" className="py-20 bg-gray-50 dark:bg-gray-800">
+      <div className="container mx-auto px-4">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
@@ -80,12 +74,12 @@ const SkillsSection = () => {
           </p>
         </motion.div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex justify-center mb-12 space-x-4"
+            className="flex flex-wrap justify-center mb-12 gap-4"
           >
             {[
               { id: 'all', label: 'Todas' },
@@ -95,10 +89,10 @@ const SkillsSection = () => {
             ].map((category) => (
               <button
                 key={category.id}
-                onClick={() => setActiveCategory(category.id as never)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                onClick={() => setActiveCategory(category.id as 'all' | 'frontend' | 'backend' | 'tools')}
+                className={`px-6 py-3 rounded-full text-sm font-medium transition-all transform hover:scale-105 ${
                   activeCategory === category.id
-                    ? 'bg-gray-800 text-white dark:bg-white dark:text-gray-900'
+                    ? 'bg-gray-800 text-white dark:bg-white dark:text-gray-900 shadow-lg'
                     : 'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'
                 }`}
               >
@@ -111,34 +105,34 @@ const SkillsSection = () => {
             variants={container}
             initial="hidden"
             animate={inView ? "show" : "hidden"}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8"
           >
             {filteredSkills.map((skill, index) => (
               <motion.div
                 key={index}
-                variants={item}
-                transition={{ duration: 0.5 }}
-                className="group"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
+                className="flex flex-col items-center gap-4"
               >
-                <div className="flex justify-between items-center mb-2">
-                  <div className="flex items-center">
-                    <span 
-                      className="h-3 w-3 rounded-full mr-2" 
-                      style={{ backgroundColor: skill.color }}
-                    ></span>
-                    <span className="font-medium text-gray-800 dark:text-gray-200">{skill.name}</span>
-                  </div>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">{skill.level}%</span>
-                </div>
-                <div className="w-full h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${skill.level}%` }}
-                    transition={{ duration: 1, delay: 0.3 + index * 0.1 }}
-                    className="h-full rounded-full"
-                    style={{ backgroundColor: skill.color } as never}
-                  ></motion.div>
-                </div>
+                <motion.div
+                  animate={{
+                    y: [0, -5, 0],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                    ease: "easeInOut",
+                  }}
+                  className="w-16 h-16 md:w-20 md:h-20"
+                >
+                  <Icon icon={skill.icon} className="w-full h-full" />
+                </motion.div>
+                <p className="text-gray-800 dark:text-gray-200 font-medium text-center">
+                  {skill.name}
+                </p>
               </motion.div>
             ))}
           </motion.div>
@@ -153,20 +147,21 @@ const SkillsSection = () => {
           <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Atualmente estudando</h3>
           <div className="flex flex-wrap gap-4">
             {[
-              { name: 'Ruby on Rails', color: '#CC0000' },
-              { name: 'React Server Components', color: '#61DAFB' },
-              { name: 'Testing Library', color: '#FF4785' },
-              { name: 'Cypress', color: '#17202C' }
+              { name: 'Ruby on Rails', icon: 'logos:rails', color: '#CC0000' },
+              { name: 'React Server Components', icon: 'logos:react', color: '#61DAFB' },
+              { name: 'Testing Library', icon: 'simple-icons:testinglibrary', color: '#FF4785' },
+              { name: 'Cypress', icon: 'logos:cypress', color: '#17202C' }
             ].map((tech, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
-                className="px-4 py-2 rounded-full text-white text-sm font-medium flex items-center"
-                style={{ backgroundColor: tech.color } as never}
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-800"
               >
-                <span>{tech.name}</span>
+                <Icon icon={tech.icon} className="w-5 h-5" />
+                <span className="text-gray-800 dark:text-gray-200 text-sm font-medium">{tech.name}</span>
               </motion.div>
             ))}
           </div>
