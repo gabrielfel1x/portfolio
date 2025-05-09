@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ExternalLink, Github, X } from 'lucide-react';
+import { ExternalLink, X } from 'lucide-react';
 import concord from '../utils/concord.png';
 import imart from '../utils/imart.png'
 import recipesExplorer from '../utils/recipes.png';
@@ -167,17 +167,6 @@ const ProjectsSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                   <div className="p-4 w-full">
                     <div className="flex space-x-3 justify-end">
-                      {project.repo && (
-                        <a 
-                          href={project.repo} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors text-white"
-                          aria-label="GitHub Repository"
-                        >
-                          <Github size={18} />
-                        </a>
-                      )}
                       <a 
                         href={project.link} 
                         target="_blank" 
@@ -285,19 +274,7 @@ const ProjectsSection = () => {
                   </div>
                 )}
                 
-                <div className="flex flex-wrap gap-4 mt-6">
-                  {selectedProject.repo && (
-                    <a 
-                      href={selectedProject.repo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-6 py-2 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                    >
-                      <Github size={18} />
-                      Código fonte
-                    </a>
-                  )}
-                  
+                <div className="flex flex-wrap gap-4 mt-6">                  
                   <a 
                     href={selectedProject.link}
                     target="_blank"
