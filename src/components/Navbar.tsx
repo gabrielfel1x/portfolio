@@ -133,19 +133,26 @@ const Navbar = () => {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.nav
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden overflow-hidden"
+              className="md:hidden fixed inset-0 z-50 flex flex-col items-center justify-center bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm"
             >
-              <div className="py-4 space-y-4">
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="absolute top-6 right-6 p-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                aria-label="Fechar menu"
+              >
+                <X size={32} />
+              </button>
+              <div className="flex flex-col items-center space-y-8">
                 {navItems.map(item => (
                   <a
                     key={item.id}
                     href={`#${item.id}`}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`block text-base font-medium transition-colors hover:text-gray-600 dark:hover:text-gray-300
+                    className={`text-xl font-semibold transition-colors hover:text-gray-600 dark:hover:text-gray-300
                       ${activeSection === item.id 
                         ? 'text-black dark:text-white' 
                         : 'text-gray-500 dark:text-gray-400'}`}
@@ -153,6 +160,33 @@ const Navbar = () => {
                     {item.label}
                   </a>
                 ))}
+                <div className="flex items-center space-x-6 pt-4">
+                  <button 
+                    onClick={toggleTheme}
+                    className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                    aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+                  >
+                    {theme === 'light' ? <Moon size={22} /> : <Sun size={22} />}
+                  </button>
+                  <a
+                    href="https://github.com/gabrielfel1x"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+                    aria-label="GitHub"
+                  >
+                    <Github size={24} />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/gabrielfel1x"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+                    aria-label="LinkedIn"
+                  >
+                    <Linkedin size={24} />
+                  </a>
+                </div>
               </div>
             </motion.nav>
           )}
